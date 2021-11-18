@@ -1,0 +1,111 @@
+format = """\
+    ${username}\
+    ${hostname}\
+    ${custom.pwd}\
+    ${git_branch}\
+    ${python}\
+    ${rust}\
+    ${cmd_duration}\
+    ${line_break}\
+    ${jobs}\
+    ${shell}\
+    ${character}\
+    """
+
+# Active modules
+
+[character]
+error_symbol = "[✖](bold red)"
+success_symbol = "[❯](bold green)"
+
+[cmd_duration]
+show_milliseconds = true
+style = "yellow"
+
+[custom.pwd]
+command = "path_shortener"
+description = "Prints the current working directory by compacting it."
+style = "cyan"
+format = "[$output]($style) "
+when = "true"
+
+[git_branch]
+style = "purple"
+symbol = " "
+
+[package]
+style = "208"
+symbol = " "
+
+[python]
+python_binary = "python3"
+style = "yellow"
+symbol = " "
+
+[rust]
+style = "red"
+symbol = " "
+
+[shell]
+bash_indicator = "bash"
+zsh_indicator = "zsh"
+disabled = false
+
+# Disabled modules
+[aws]
+disabled = true
+[battery]
+disabled = true
+[conda]
+disabled = true
+[crystal]
+disabled = true
+[directory]
+disabled = true
+[docker_context]
+disabled = true
+[dotnet]
+disabled = true
+[elixir]
+disabled = true
+[elm]
+disabled = true
+[env_var]
+disabled = true
+[erlang]
+disabled = true
+# The following takes too long to run on big repo
+[git_status]
+disabled = true
+[golang]
+disabled = true
+[java]
+disabled = true
+[julia]
+disabled = true
+[kubernetes]
+disabled = true
+[hg_branch]
+disabled = true
+[nim]
+disabled = true
+# [nix_shell]
+# disabled = true
+[nodejs]
+disabled = true
+[ocaml]
+disabled = true
+[php]
+disabled = true
+[purescript]
+disabled = true
+[ruby]
+disabled = true
+[singularity]
+disabled = true
+[terraform]
+disabled = true
+[time]
+disabled = true
+[zig]
+disabled = true
