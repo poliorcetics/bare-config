@@ -15,9 +15,6 @@
 [pull]
   rebase = true
 
-[merge]
-  tool = "lvim -d"
-
 [alias]
   a = add
   d = diff
@@ -42,6 +39,9 @@
   st = stash
   s1 = squash 1
   ri = rebase -i
+  # v is for 'vim' since that's the diff tool I use (modulo lvim/nvim)
+  vd = difftool
+  vs = difftool --staged
 
 [interactive]
   diffFilter = delta --color-only
