@@ -13,3 +13,6 @@ for compfile in `fd -t f '^_.*' "$HOME/.config/shells/bash/"`; do
 done
 
 alias shistory='history | rg'
+
+eval "$(zoxide init bash)"
+eval "$(starship init bash)"

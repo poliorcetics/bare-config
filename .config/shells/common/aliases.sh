@@ -24,7 +24,7 @@ alias lmg='lm --git'; # 'lm' comes from a personal Rust crate and already has th
 
 source "$HOME/.config/shells/common/utils.sh"
 
-if [[ is_mac ]]; then
+if ( is_mac ); then
   alias showsystemfiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder'
   alias hidesystemfiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder'
 

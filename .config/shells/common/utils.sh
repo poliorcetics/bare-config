@@ -10,22 +10,22 @@ if [[ -z "${shell_utils_imported+x}" ]]; then
 
   # Defining the functions this way ensures we do the test only once.
   if [[ "$OSTYPE" == "darwin"* ]]; then
-    function is_mac() { return true; }
-    function is_linux() { return false; }
+    function is_mac() { return 0; }
+    function is_linux() { return 1; }
   elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    function is_mac() { return false; }
-    function is_linux() { return true; }
+    function is_mac() { return 1; }
+    function is_linux() { return 0; }
   else
     sh_error "Unsupported os type: '$OSTYPE'"
   fi
 
   MAIN_SHELL="${MAIN_SHELL:-zsh}"
   if [[ "$MAIN_SHELL" == "zsh" ]]; then
-    function is_zsh() { return true; }
-    function is_bash() { return false; }
+    function is_zsh() { return 0; }
+    function is_bash() { return 1; }
   elif [[ "$MAIN_SHELL" == "bash" ]]; then
-    function is_zsh() { return false; }
-    function is_bash() { return true; }
+    function is_zsh() { return 1; }
+    function is_bash() { return 0; }
   else
     sh_error "Unsupported shell type: '$MAIN_SHELL'"
   fi
@@ -65,14 +65,14 @@ if [[ -z "${shell_utils_imported+x}" ]]; then
   }
 
   function run_all_updates() {
-    local is_apt=`command -v apt; echo $?`
-    if [[ is_mac ]]; then
+    local is_apt=`command -v apt > /dev/null && echo true || echo false`
+    if ( is_mac ); then
       echo "=== Homebrew ==="
       echo ""
 
       brew upgrade
       brew cleanup
-    elif [[ is_linux ]] && [[ is_apt ]]; then
+    elif ( is_linux ) && ( $is_apt ); then
       echo "=== APT ==="
       echo ""
 
@@ -104,14 +104,14 @@ if [[ -z "${shell_utils_imported+x}" ]]; then
       esac
     done
 
-    if [[ is_mac ]] && [[ update_rust_analyzer ]]; then
+    if ( is_mac ) && ( $update_rust_analyzer ); then
       echo "=== Rust Analyzer ==="
       echo ""
       ( cd ~/Projects/rust/rust-analyzer \
           && git checkout master \
           && git pull \
           && cargo xtask install --server )
-    elif [[ update_rust_analyzer ]]; then
+    elif ( $update_rust_analyzer ); then
       sh_error "Updating Rust Analyzer from source is not supported outside of macOS for now"
     fi
 
