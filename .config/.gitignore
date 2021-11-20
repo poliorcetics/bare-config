@@ -1,1 +1,4 @@
 git/local_config
+completions/
+local.zsh
+local.bash
