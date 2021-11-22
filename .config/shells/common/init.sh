@@ -25,14 +25,12 @@ path_add "$HOME/.local/bin" # Part of the XDG specification for user-specific bi
 
 # Shell-specific content is called after to ensure it is not overwritten by common config.
 # Then load Shell-specific local config
-if ( is_zsh ); then
+if ( __shell_init_is_zsh ); then
   source "$shell_config_path/zsh/init.zsh";
   [[ -f "$shell_config_path/zsh/local.zsh" ]] && source "$shell_config_path/zsh/local.zsh"
-elif ( is_bash ); then 
+elif ( __shell_init_is_bash ); then 
   source "$shell_config_path/bash/init.bash";
   [[ -f "$shell_config_path/bash/local.bash" ]] && source "$shell_config_path/bash/local.bash"
 fi
 
 unset -v shell_config_path
-# Utils cleanup cannot be done before everything else has been completed.
-unset -f sh_error is_mac is_linux is_zsh is_bash

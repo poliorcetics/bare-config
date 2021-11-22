@@ -3,31 +3,31 @@
 # Else `zsh` is assumed
 
 if [[ -z "${shell_utils_imported+x}" ]]; then
-  function sh_error {
+  function __shell_init_sh_error {
     echo "ERROR: $@"
     exit 1
   }
 
   # Defining the functions this way ensures we do the test only once.
   if [[ "$OSTYPE" == "darwin"* ]]; then
-    function is_mac() { return 0; }
-    function is_linux() { return 1; }
+    function __shell_init_is_mac() { return 0; }
+    function __shell_init_is_linux() { return 1; }
   elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    function is_mac() { return 1; }
-    function is_linux() { return 0; }
+    function __shell_init_is_mac() { return 1; }
+    function __shell_init_is_linux() { return 0; }
   else
-    sh_error "Unsupported os type: '$OSTYPE'"
+    __shell_init_sh_error "Unsupported os type: '$OSTYPE'"
   fi
 
   MAIN_SHELL="${MAIN_SHELL:-zsh}"
   if [[ "$MAIN_SHELL" == "zsh" ]]; then
-    function is_zsh() { return 0; }
-    function is_bash() { return 1; }
+    function __shell_init_is_zsh() { return 0; }
+    function __shell_init_is_bash() { return 1; }
   elif [[ "$MAIN_SHELL" == "bash" ]]; then
-    function is_zsh() { return 1; }
-    function is_bash() { return 0; }
+    function __shell_init_is_zsh() { return 1; }
+    function __shell_init_is_bash() { return 0; }
   else
-    sh_error "Unsupported shell type: '$MAIN_SHELL'"
+    __shell_init_sh_error "Unsupported shell type: '$MAIN_SHELL'"
   fi
 
   # Add arg '$1' to $PATH if not already in it.
@@ -66,13 +66,13 @@ if [[ -z "${shell_utils_imported+x}" ]]; then
 
   function run_all_updates() {
     local is_apt=`command -v apt > /dev/null && echo true || echo false`
-    if ( is_mac ); then
+    if ( __shell_init_is_mac ); then
       echo "=== Homebrew ==="
       echo ""
 
       brew upgrade
       brew cleanup
-    elif ( is_linux ) && ( $is_apt ); then
+    elif ( __shell_init_is_linux ) && ( $is_apt ); then
       echo "=== APT ==="
       echo ""
 
@@ -99,12 +99,12 @@ if [[ -z "${shell_utils_imported+x}" ]]; then
           update_rust_analyzer=true
           ;;
         *)
-          sh_error "Unsupported arg: '$arg'"
+          __shell_init_sh_error "Unsupported arg: '$arg'"
           ;;
       esac
     done
 
-    if ( is_mac ) && ( $update_rust_analyzer ); then
+    if ( __shell_init_is_mac ) && ( $update_rust_analyzer ); then
       echo "=== Rust Analyzer ==="
       echo ""
       ( cd ~/Projects/rust/rust-analyzer \
@@ -112,7 +112,7 @@ if [[ -z "${shell_utils_imported+x}" ]]; then
           && git pull \
           && cargo xtask install --server )
     elif ( $update_rust_analyzer ); then
-      sh_error "Updating Rust Analyzer from source is not supported outside of macOS for now"
+      __shell_init_sh_error "Updating Rust Analyzer from source is not supported outside of macOS for now"
     fi
 
     gen_all_completions

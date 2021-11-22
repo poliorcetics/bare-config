@@ -20,7 +20,7 @@ mkdir -p "$XDG_CONFIG_HOME" "$XDG_DATA_HOME" "$XDG_STATE_HOME" "$XDG_CACHE_HOME"
 mkdir -p "$CARGO_HOME" "$RUSTUP_HOME"
 
 # Install brew if not already installed. This also install Apple's Command Line Tools on first run
-if ( is_mac ) && ! command -v brew &> /dev/null; then
+if ( __shell_init_is_mac ) && ! command -v brew &> /dev/null; then
   echo "Installing HomeBrew, and possibly Apple's Command Line Tools if they were not previously installed"
   curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | sh
 
@@ -84,9 +84,9 @@ fi
 if ! command -v lvim &> /dev/null; then
   restore_backup=0
   function cp_command() {
-    if ( is_mac ); then
+    if ( __shell_init_is_mac ); then
       cp -R "$@"
-    elif ( is_linux ); then
+    elif ( __shell_init_is_linux ); then
       cp -r "$@"
     fi
   }
@@ -110,7 +110,7 @@ fi
 gen_all_completions
 
 # macOS specific actions
-if ( is_mac ); then
+if ( __shell_init_is_mac ); then
   mkdir -p "$HOME/Projects/rust/"
   cd "$HOME/Projects/rust/"
   git clone https://github.com/rust-analyzer/rust-analyzer

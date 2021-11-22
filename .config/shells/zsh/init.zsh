@@ -32,7 +32,7 @@ export HISTSIZE=$SAVEHIST
 export HISTORY_IGNORE=fg
 export HISTTIMEFORMAT="[%F %T] "
 
-if ( is_mac ); then
+if ( __shell_init_is_mac ); then
   [ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh || true
 fi
 
