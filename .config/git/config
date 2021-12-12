@@ -37,6 +37,7 @@
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
   squash = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
   st = stash
+  ssd = "!git stash; git stash drop"
   s1 = squash 1
   ri = rebase -i
   # v is for 'vim' since that's the diff tool I use (modulo lvim/nvim)
