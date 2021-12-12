@@ -29,6 +29,12 @@ export LC_MONETARY="fr_FR.UTF-8"
 
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/rc.py"
 
+less_dir="$XDG_STATE_HOME/less"
+export LESSHISTFILE="$less_dir/lesshistory"
+export LESSHISTSIZE=1000
+mkdir -p "$less_dir"
+unset -v less_dir
+
 # Rust environment because I always install it: I need it for LunarVim and lots of other tools
 export RUSTUP_HOME="$XDG_CACHE_HOME/rustup"  # Put Rustup in cache, it only contains toolchains and downloads
 export CARGO_HOME="$XDG_DATA_HOME/cargo"     # Cargo on the other hand contains user-specific config and binaries 
