@@ -41,7 +41,8 @@ fi
 export fpath=( "$XDG_CONFIG_HOME/shells/zsh/completions" $fpath )
 
 autoload -Uz compinit
-compinit
+mkdir -p "$XDG_CACHE_HOME/zsh"
+compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 
 # pip completion is broken without this
 source "$XDG_CONFIG_HOME/shells/zsh/completions/_pip3"
