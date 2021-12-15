@@ -90,13 +90,18 @@ if [[ -z "${shell_utils_imported+x}" ]]; then
   
     echo "=== Cargo ==="
     echo ""
-    cargo install --list | rg '([\w-]+) v\S+:' -r '$1' | xargs cargo install
+    cargo install cargo-update
+    cargo install-update --all
 
     local update_rust_analyzer=false
+    local update_helix=false
     for arg in "$@"; do
       case "$arg" in
         "--ra")
           update_rust_analyzer=true
+          ;;
+        "--hx")
+          update_helix=true
           ;;
         *)
           __shell_init_sh_error "Unsupported arg: '$arg'"
@@ -111,8 +116,30 @@ if [[ -z "${shell_utils_imported+x}" ]]; then
           && git checkout master \
           && git pull \
           && cargo xtask install --server )
+    elif ( __shell_init_is_linux ) && ( update_rust_analyzer ); then
+      echo "=== Rust Analyzer ==="
+      echo ""
+      ( cd ~/repos/rust-analyzer \
+          && git checkout master \
+          && git pull \
+          && cargo xtask install --server )
     elif ( $update_rust_analyzer ); then
       __shell_init_sh_error "Updating Rust Analyzer from source is not supported outside of macOS for now"
+    fi
+
+    if ( __shell_init_is_linux ) && ( update_rust_analyzer ); then
+      echo "=== Helix ==="
+      echo ""
+      local helix_runtime="${HELIX_RUNTIME:${XDG_CONFIG_HOME:-$HOME/.config}/helix/runtime}"
+      ( cd ~/repos/helix \
+          && git checkout master \
+          && git pull \
+          && git submodule update --init --recursive \
+          && cargo install --path helix-term \
+          && rm -rf "$helix_runtime" \
+          && cp -r runtime "$helix_runtime" )
+    elif ( $update_rust_analyzer ); then
+      __shell_init_sh_error "Updating Helix from source is not supported outside of Linux for now"
     fi
 
     gen_all_completions
