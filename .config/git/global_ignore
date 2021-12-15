@@ -38,5 +38,8 @@ Temporary Items
 *.xcworkspace
 *.xcodeproj
 
+# Use a specific repo for RA to not interfere with CLI commands
+target-rust-analyzer
+
 # YCM (vim plugin) files
 .ycm_extra_conf.py
