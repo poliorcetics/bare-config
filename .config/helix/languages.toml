@@ -1,0 +1,20 @@
+[[language]]
+name = "rust"
+auto-format = false
+[language.config]
+procMacro = { enable = true }
+lruCapacity = 256
+checkOnsave = { command = "clippy", extraArgs = ["--target-dir", "target-rust-analyzer"] }
+target = "x86_64-windows-msvc"
+
+[[language]]
+name = "toml"
+indent = { tab-width = 4, unit = "    " }
+
+[[language]]
+name = "protobuf"
+indent = { tab-width = 4, unit = "    " }
+
+[[language]]
+name = "bash"
+indent = { tab-width = 4, unit = "    " }
