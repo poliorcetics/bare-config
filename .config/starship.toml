@@ -3,6 +3,8 @@ format = """\
     ${hostname}\
     ${custom.pwd}\
     ${git_branch}\
+    ${git_state}\
+    ${git_status}\
     ${python}\
     ${rust}\
     ${cmd_duration}\
@@ -11,6 +13,8 @@ format = """\
     ${shell}\
     ${character}\
     """
+
+command_timeout = 50
 
 # Active modules
 
@@ -23,7 +27,7 @@ show_milliseconds = true
 style = "yellow"
 
 [custom.pwd]
-command = "path_shortener"
+command = "pwd"
 description = "Prints the current working directory by compacting it."
 style = "cyan"
 format = "[$output]($style) "
@@ -31,20 +35,29 @@ when = "true"
 
 [git_branch]
 style = "purple"
-symbol = " "
+symbol = ""
 
 [package]
 style = "208"
-symbol = " "
+symbol = "p "
 
 [python]
 python_binary = "python3"
 style = "yellow"
-symbol = " "
+symbol = "Py "
 
 [rust]
 style = "red"
-symbol = " "
+symbol = "Rs "
+
+[git_state]
+disabled = false
+
+# The following takes too long to run on big repo
+[git_status]
+disabled = false
+style = "yellow"
+stashed = ""
 
 [shell]
 bash_indicator = "bash"
@@ -75,8 +88,6 @@ disabled = true
 [erlang]
 disabled = true
 # The following takes too long to run on big repo
-[git_status]
-disabled = true
 [golang]
 disabled = true
 [java]
