@@ -83,11 +83,11 @@ if [[ -z "${shell_utils_imported+x}" ]]; then
     echo "=== PIP ==="
     echo ""
     pip3 list | rg '(\S+)\s+\d+.\d+.\d+' -r '$1' | xargs pip3 install --upgrade
-  
+
     echo "=== Rustup ==="
     echo ""
     rustup update
-  
+
     echo "=== Cargo ==="
     echo ""
     cargo install cargo-update
@@ -109,37 +109,38 @@ if [[ -z "${shell_utils_imported+x}" ]]; then
       esac
     done
 
-    if ( __shell_init_is_mac ) && ( $update_rust_analyzer ); then
-      echo "=== Rust Analyzer ==="
-      echo ""
-      ( cd ~/Projects/rust/rust-analyzer \
-          && git checkout master \
-          && git pull \
-          && cargo xtask install --server )
-    elif ( __shell_init_is_linux ) && ( update_rust_analyzer ); then
-      echo "=== Rust Analyzer ==="
-      echo ""
-      ( cd ~/repos/rust-analyzer \
-          && git checkout master \
-          && git pull \
-          && cargo xtask install --server )
-    elif ( $update_rust_analyzer ); then
-      __shell_init_sh_error "Updating Rust Analyzer from source is not supported outside of macOS for now"
+    if ( $update_helix ) || ( $update_rust_analyzer ); then
+      if ( __shell_init_is_mac ); then
+        local manual_install_repos="$HOME/Projects/rust"
+      elif ( __shell_init_is_linux ); then
+        local manual_install_repos="$HOME/repos"
+      else
+        __shell_init_sh_error "Not repos from which to update on this platform"
+      fi
     fi
 
-    if ( __shell_init_is_linux ) && ( update_rust_analyzer ); then
-      echo "=== Helix ==="
-      echo ""
-      local helix_runtime="${HELIX_RUNTIME:${XDG_CONFIG_HOME:-$HOME/.config}/helix/runtime}"
-      ( cd ~/repos/helix \
-          && git checkout master \
-          && git pull \
-          && git submodule update --init --recursive \
-          && cargo install --path helix-term \
-          && rm -rf "$helix_runtime" \
-          && cp -r runtime "$helix_runtime" )
-    elif ( $update_rust_analyzer ); then
-      __shell_init_sh_error "Updating Helix from source is not supported outside of Linux for now"
+    if [ ! -z "$manual_install_repos" ]; then
+      if ( $update_rust_analyzer ); then
+        echo "=== Rust Analyzer ==="
+        echo ""
+        ( cd "$manual_install_repos/rust-analyzer" \
+            && git checkout master \
+            && git pull \
+            && cargo xtask install --server )
+      fi
+
+      if ( $update_helix ); then
+        echo "=== Helix ==="
+        echo ""
+        local helix_runtime="${HELIX_RUNTIME:-${XDG_CONFIG_HOME:-$HOME/.config}/helix/runtime}"
+        ( cd "$manual_install_repos/helix" \
+            && git checkout master \
+            && git pull \
+            && git submodule update --init --recursive \
+            && cargo install --force --path helix-term \
+            && rm -rf "$helix_runtime" \
+            && cp -r runtime "$helix_runtime" )
+      fi
     fi
 
     gen_all_completions
