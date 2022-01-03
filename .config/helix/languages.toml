@@ -4,9 +4,14 @@ auto-format = false
 
 [language.config]
 procMacro.enable = true
+# I have beefy machines, let's use them
 lruCapacity = 256
+# A little slower than a simple check, but so useful
 checkOnSave.command = "clippy"
-checkOnSave.extraArgs = ["--target-dir", "target-rust-analyzer"]
+# Putting the target dir for RA inside target/ means it is automatically cleaned up
+# by 'cargo clean' and hidden when there is a .gitignore or some global ignore for
+# a Rust config
+checkOnSave.extraArgs = ["--target-dir", "target/target-rust-analyzer"]
 # checkOnSave.target = "x86_64-pc-windows-msvc"
 # cargo.target = "x86_64-pc-windows-msvc"
 hoverActions.references = true
