@@ -1,5 +1,5 @@
-theme = "nord"
+theme = "gruvbox"
 
 [editor]
-line-number = "relative"
+line-number = "absolute"
 completion-trigger-len = 1

@@ -3,28 +3,30 @@ name = "rust"
 auto-format = false
 
 [language.config]
-procMacro = { enable = true }
+procMacro.enable = true
 lruCapacity = 256
-checkOnsave = { command = "clippy", extraArgs = ["--target-dir", "target-rust-analyzer"], target = "x86_64-pc-windows-msvc" }
-target = "x86_64-pc-windows-msvc"
-hoverActions = { references = true }
-lens = { methodReferences = true, references = true, enumVariantReferences = true }
-
-[language.config.workspace.symbol.search]
-kind = "all_symbols"
+checkOnSave.command = "clippy"
+checkOnSave.extraArgs = ["--target-dir", "target-rust-analyzer"]
+# checkOnSave.target = "x86_64-pc-windows-msvc"
+# cargo.target = "x86_64-pc-windows-msvc"
+hoverActions.references = true
+lens.methodReferences = true
+lens.references = true
+lens.enumVariantReferences = true
+workspace.symbol.search.kind = "all_symbols"
 
 # https://rust-analyzer.github.io/manual.html#user-snippet-completions
-[language.config.completion.snippets."test function"]
-prefix = ["tfn"]
-body = ["#[test]", "fn test_$1() {", "    $2", "}"]
-description = "Insert a new test function"
-scope = "item"
+# [language.config.completion.snippets."test function"]
+# prefix = ["tfn"]
+# body = ["#[test]", "fn test_$1() {", "    $2", "}"]
+# description = "Insert a new test function"
+# scope = "item"
 
-[language.config.completion.snippets."test module"]
-prefix = ["tmod"]
-body = ["#[cfg(test)]", "mod tests {", "    use super::*", "",         "    #[test]", "    fn test_$1() {", "        $2", "    }", "}"]
-description = "Insert a new test module"
-scope = "item"
+# [language.config.completion.snippets."test module"]
+# prefix = ["tmod"]
+# body = ["#[cfg(test)]", "mod tests {", "    use super::*", "",         "    #[test]", "    fn test_$1() {", "        $2", "    }", "}"]
+# description = "Insert a new test module"
+# scope = "item"
 
 
 
