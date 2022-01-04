@@ -1,4 +1,3 @@
-
 # Set environment variables that are always there, regardless of shell and OS
 
 ## XDG specification
@@ -14,7 +13,8 @@ export XDG_STATE_HOME="$HOME/.local/state"  # User-specific state files, not por
 export XDG_CACHE_HOME="$HOME/.local/cache"  # User-specific non-essential data files 
 
 # EDITOR is used by many program that needs file-like interaction with the user, e.g Git
-export EDITOR="lvim"
+export EDITOR="hx"
+export VISUAL="hx"
 
 # Lang, most tools do not handle anything but English,
 # and americans do not know how to speak English so use GB
