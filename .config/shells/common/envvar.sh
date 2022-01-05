@@ -18,14 +18,18 @@ export VISUAL="hx"
 
 # Lang, most tools do not handle anything but English,
 # and americans do not know how to speak English so use GB
-export LANG=en_GB.UTF-8
-export LC_MESSAGES="en_GB.UTF-8"
+export LANG="en_GB.UTF-8"
 export LC_ALL="en_GB.UTF-8"
+export LC_MESSAGES="en_GB.UTF-8"
 # Still use French for numbers, time and money, these are the formats and units I know
-export LC_NUMERIC="fr_FR.UTF-8"
-export LC_TIME="fr_FR.UTF-8"
+export LC_ADDRESS="fr_FR.UTF-8"
 export LC_COLLATE="fr_FR.UTF-8"
+export LC_IDENTIFICATION="fr_FR.UTF-8"
+export LC_MEASUREMENT="fr_FR.UTF-8"
 export LC_MONETARY="fr_FR.UTF-8"
+export LC_NUMERIC="fr_FR.UTF-8"
+export LC_TELEPHONE="fr_FR.UTF-8"
+export LC_TIME="fr_FR.UTF-8"
 
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/rc.py"
 
