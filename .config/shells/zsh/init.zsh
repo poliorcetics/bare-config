@@ -20,8 +20,14 @@ bindkey ^E end-of-line
 autoload -U history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
-bindkey "^[[A" history-beginning-search-backward-end
-bindkey "^[[B" history-beginning-search-forward-end
+
+if ( __shell_init_is_mac ); then
+  bindkey "^[[A" history-beginning-search-backward-end
+  bindkey "^[[B" history-beginning-search-forward-end
+elif ( __shell_init_is_linux ); then
+  bindkey "^[OA" history-beginning-search-backward-end
+  bindkey "^[OB" history-beginning-search-forward-end
+fi
 
 export ZSH_CACHE_DIR="$XDG_STATE_HOME/zsh"
 test -d "$ZSH_CACHE_DIR" || mkdir -p "$ZSH_CACHE_DIR"
