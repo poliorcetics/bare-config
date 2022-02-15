@@ -9,6 +9,9 @@
   excludesfile = ~/.config/git/global_ignore
   pager = delta
 
+[commit]
+  template = ~/.config/git/message
+
 [fetch]
   prune = true
 
@@ -20,6 +23,7 @@
   d = diff
   ds = diff --staged
   dl = diff .
+  db = diff origin..HEAD
   p = pull
   pr = pull --rebase
   ps = push
@@ -35,9 +39,10 @@
   cam = commit --amend -m
   b = branch
   unstage = reset HEAD --
+  lb = log --pretty=format:'%Cred%h %Cblue%an %Cgreen%ai%C(yellow)%d%n%B' origin..HEAD
   # Pretty log graph for a project
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
-  lb = "!f(){ local currentbranch=$(git rev-parse --abbrev-ref HEAD); git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative \"${1:-$currentbranch}\"; };f"
+  lgb = "!f(){ local currentbranch=$(git rev-parse --abbrev-ref HEAD); git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative \"${1:-$currentbranch}\"; };f"
   squash = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
   st = stash
   ssd = "!git stash && git stash drop"
@@ -46,7 +51,7 @@
   # v is for 'vim' since that's the diff tool I use (modulo lvim/nvim)
   vd = difftool
   vs = difftool --staged
-  rb = "!git rebase -i $(git merge-base HEAD develop)"
+  rb = "!git rebase -i $(git merge-base HEAD origin)"
 
 [interactive]
   diffFilter = delta --color-only
