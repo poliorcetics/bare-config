@@ -7,10 +7,16 @@ export HISTSIZE=$HISTFILESIZE
 export HISTIGNORE=fg
 export HISTTIMEFORMAT="[%F %T] "
 
+shopt -s checkwinsize
+shopt -s expand_aliases
+shopt -s histappend
+
 # Completion files are named '_{command}' in their shell dir
 for compfile in `fd -t f '^_.*' "$HOME/.config/shells/bash/"`; do
   source "$compfile"
 done
+
+[ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
 alias shistory='history | rg'
 
