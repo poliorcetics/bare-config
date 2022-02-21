@@ -13,6 +13,8 @@ alias ..='z ..'
 alias rgi='rg --no-ignore'
 alias fdi='fd -I'
 
+alias pj='pijul'
+
 alias ls='exa -F --colour-scale --time-style long-iso --group-directories-first';
 alias la='exa -haF --colour-scale --time-style long-iso --group-directories-first';
 alias ll='exa -lhaF --colour-scale --time-style long-iso --group-directories-first';
