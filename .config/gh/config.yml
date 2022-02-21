@@ -6,8 +6,8 @@ git_protocol: ssh
 prompt: enabled
 # A pager program to send command output to, e.g. "less". Set the value to "cat" to disable the pager.
 pager:
-# Aliases allow you to create nicknames for gh commands
-# aliases:
+    # Aliases allow you to create nicknames for gh commands
+    # aliases:
     co: pr checkout
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
