@@ -51,8 +51,14 @@ if [[ -z "${shell_utils_imported+x}" ]]; then
    
     gh completion -s $1 > "$comp_dir/_gh"
 
-    pip3 completion --$1 > "$comp_dir/_pip3"
-    pip completion --$1 > "$comp_dir/_pip"
+    local has_pip3=`command -v pip3 > /dev/null && echo true || echo false`
+    local has_pip=`command -v pip > /dev/null && echo true || echo false`
+    if ( $has_pip3 ); then
+        pip3 completion --$1 > "$comp_dir/_pip3"
+    fi
+    if ( $has_pip ); then
+        pip completion --$1 > "$comp_dir/_pip"
+    fi
 
     kitty + complete setup $1 > "$comp_dir/_kitty"
 
@@ -66,6 +72,7 @@ if [[ -z "${shell_utils_imported+x}" ]]; then
 
   function run_all_updates() {
     local is_apt=`command -v apt > /dev/null && echo true || echo false`
+    local is_pacman=`command -v pacman > /dev/null && echo true || echo false`
     if ( __shell_init_is_mac ); then
       echo "=== Homebrew ==="
       echo ""
@@ -78,6 +85,12 @@ if [[ -z "${shell_utils_imported+x}" ]]; then
 
       sudo -k 2>/dev/null || true
       sudo apt update && sudo apt upgrade
+    elif ( __shell_init_is_linux ) && ( $is_pacman ); then
+      echo "=== PACMAN ==="
+      echo ""
+
+      sudo -k 2>/dev/null || true
+      sudo pacman -Syu
     fi
 
     echo "=== PIP ==="
