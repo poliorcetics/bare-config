@@ -149,10 +149,10 @@ if [[ -z "${shell_utils_imported+x}" ]]; then
         ( cd "$manual_install_repos/helix" \
             && git checkout master \
             && git pull \
-            && git submodule update --init --recursive \
             && cargo install --force --path helix-term \
-            && rm -rf "$helix_runtime" \
-            && cp -r runtime "$helix_runtime" )
+            && ln -s "$PWD/runtime" "$helix_runtime" \
+            && hx --grammar fetch \
+            && hx --grammar build )
       fi
     fi
 
