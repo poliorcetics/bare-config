@@ -100,8 +100,8 @@ disabled = true
 disabled = true
 [nim]
 disabled = true
-# [nix_shell]
-# disabled = true
+[nix_shell]
+disabled = true
 [nodejs]
 disabled = true
 [ocaml]
