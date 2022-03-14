@@ -30,6 +30,12 @@ if [[ -z "${shell_utils_imported+x}" ]]; then
     __shell_init_sh_error "Unsupported shell type: '$MAIN_SHELL'"
   fi
 
+  if [[ -z "$IN_NIX_SHELL" ]]; then
+    function __shell_init_is_in_nix_shell() { return 1; }
+  else
+    function __shell_init_is_in_nix_shell() { return 0; }
+  fi
+
   # Add arg '$1' to $PATH if not already in it.
   # Avoids duplication in $PATH.
   function path_add() {
