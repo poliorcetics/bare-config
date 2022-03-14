@@ -12,9 +12,19 @@ if [[ -z "${shell_utils_imported+x}" ]]; then
   if [[ "$OSTYPE" == "darwin"* ]]; then
     function __shell_init_is_mac() { return 0; }
     function __shell_init_is_linux() { return 1; }
+    function __shell_init_is_pacman() { return 1; }
+    function __shell_init_is_apt() { return 1; }
   elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     function __shell_init_is_mac() { return 1; }
     function __shell_init_is_linux() { return 0; }
+
+    if ( command -v pacman > /dev/null ); then
+      function __shell_init_is_pacman() { return 0; }
+      function __shell_init_is_apt() { return 1; }
+    elif ( command -v apt > /dev/null ); then
+      function __shell_init_is_pacman() { return 1; }
+      function __shell_init_is_apt() { return 0; }
+    fi
   else
     __shell_init_sh_error "Unsupported os type: '$OSTYPE'"
   fi
@@ -77,26 +87,24 @@ if [[ -z "${shell_utils_imported+x}" ]]; then
   }
 
   function run_all_updates() {
-    local is_apt=`command -v apt > /dev/null && echo true || echo false`
-    local is_pacman=`command -v pacman > /dev/null && echo true || echo false`
     if ( __shell_init_is_mac ); then
       echo "=== Homebrew ==="
       echo ""
 
       brew upgrade
       brew cleanup
-    elif ( __shell_init_is_linux ) && ( $is_apt ); then
-      echo "=== APT ==="
-      echo ""
-
-      sudo -k 2>/dev/null || true
-      sudo apt update && sudo apt upgrade
-    elif ( __shell_init_is_linux ) && ( $is_pacman ); then
+    elif ( __shell_init_is_linux ) && ( __shell_init_is_pacman ); then
       echo "=== PACMAN ==="
       echo ""
 
       sudo -k 2>/dev/null || true
       sudo pacman -Syu
+    elif ( __shell_init_is_linux ) && ( __shell_init_is_apt ); then
+      echo "=== APT ==="
+      echo ""
+
+      sudo -k 2>/dev/null || true
+      sudo apt update && sudo apt upgrade
     fi
 
     echo "=== PIP ==="
@@ -107,6 +115,10 @@ if [[ -z "${shell_utils_imported+x}" ]]; then
     echo ""
     rustup update
 
+    echo "=== Tealdeer ==="
+    echo ""
+    tldr --update
+
     echo "=== Cargo ==="
     echo ""
     cargo install cargo-update
@@ -114,13 +126,14 @@ if [[ -z "${shell_utils_imported+x}" ]]; then
 
     local update_rust_analyzer=false
     local update_helix=false
+
     for arg in "$@"; do
       case "$arg" in
-        "--ra")
-          update_rust_analyzer=true
-          ;;
         "--hx")
           update_helix=true
+          ;;
+        "--ra")
+          update_rust_analyzer=true
           ;;
         *)
           __shell_init_sh_error "Unsupported arg: '$arg'"
@@ -139,15 +152,6 @@ if [[ -z "${shell_utils_imported+x}" ]]; then
     fi
 
     if [ ! -z "$manual_install_repos" ]; then
-      if ( $update_rust_analyzer ); then
-        echo "=== Rust Analyzer ==="
-        echo ""
-        ( cd "$manual_install_repos/rust-analyzer" \
-            && git checkout master \
-            && git pull \
-            && cargo xtask install --server )
-      fi
-
       if ( $update_helix ); then
         echo "=== Helix ==="
         echo ""
@@ -159,6 +163,15 @@ if [[ -z "${shell_utils_imported+x}" ]]; then
             && ln -s "$PWD/runtime" "$helix_runtime" \
             && hx --grammar fetch \
             && hx --grammar build )
+      fi
+
+      if ( $update_rust_analyzer ); then
+        echo "=== Rust Analyzer ==="
+        echo ""
+        ( cd "$manual_install_repos/rust-analyzer" \
+            && git checkout master \
+            && git pull \
+            && cargo xtask install --server )
       fi
     fi
 

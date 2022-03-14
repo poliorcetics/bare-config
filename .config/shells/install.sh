@@ -31,6 +31,7 @@ if ( __shell_init_is_mac ) && ! command -v brew &> /dev/null; then
     zsh zsh-syntax-highlighting
 
   brew install --cask \
+    alacritty \
     cyberduck \
     firefox \
     kitty \
@@ -64,21 +65,21 @@ fi
 
 # Grouped by first letter, in alphabetical order
 "$CARGO_HOME/bin/cargo" install \
-  bat bingrep \
-  cargo-binutils cargo-edit cargo-expand cargo-upgrades cargo-watch cargo-xtask \
+  bacon bat bingrep \
+  cargo-binutils cargo-edit cargo-expand cargo-generate cargo-update cargo-upgrades cargo-watch \
   du-dust \
   exa \
   fd-find \
   git-delta gitui \
-  hx hyperfine \
+  hyperfine \
   mdbook \
   pastel procs \
   ripgrep rnr \
   sd skim starship \
-  tokei typeracer \
+  tealdear tokei typeracer \
   watchexec-cli wool \
   ytop \
-  zoxide
+  zellij zoxide
 
 # Install LunarVim if not already present
 if ! command -v lvim &> /dev/null; then
@@ -107,18 +108,21 @@ if ! command -v lvim &> /dev/null; then
   unset -f cp_command
 fi
 
-gen_all_completions
-
 # macOS specific actions
 if ( __shell_init_is_mac ); then
   mkdir -p "$HOME/Projects/rust/"
   cd "$HOME/Projects/rust/"
-  git clone https://github.com/rust-analyzer/rust-analyzer
-  run_all_updates --ra
 
   echo "Remember to run 'spctl developer-mode enable-terminal' and enable it in System Preferences"
 else
-  run_all_updates
+  mkdir -p "$HOME/repos/"
+  cd "$HOME/repos/"
 fi
+
+git clone https://github.com/rust-analyzer/rust-analyzer
+git clone https://github.com/helix-editor/helix
+run_all_updates --ra --hx
+
+gen_all_completions
 
 echo "Now restart your shell or open a new one"
