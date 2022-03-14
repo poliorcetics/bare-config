@@ -11,6 +11,7 @@ format = """\
     ${line_break}\
     ${jobs}\
     ${shell}\
+    ${custom.nix}\
     ${character}\
     """
 
@@ -32,6 +33,13 @@ description = "Prints the current working directory by compacting it."
 style = "cyan"
 format = "[$output]($style) "
 when = "true"
+
+[custom.nix]
+command = "echo 'nix'"
+description = "Adds an indicator a nix shell is active when $IN_NIX_SHELL is present."
+style = ""
+format = "[$output]($style) "
+when = "test ! -z \"$IN_NIX_SHELL\""
 
 [git_branch]
 style = "purple"
@@ -60,8 +68,8 @@ style = "yellow"
 stashed = ""
 
 [shell]
-bash_indicator = "bash"
-zsh_indicator = "zsh"
+bash_indicator = "b"
+zsh_indicator = "z"
 disabled = false
 
 # Disabled modules
