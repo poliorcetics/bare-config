@@ -39,10 +39,12 @@ export LESSHISTSIZE=1000
 mkdir -p "$less_dir"
 unset -v less_dir
 
-# Rust environment because I always install it: I need it for LunarVim and lots of other tools
-export RUSTUP_HOME="$XDG_CACHE_HOME/rustup"  # Put Rustup in cache, it only contains toolchains and downloads
-export CARGO_HOME="$XDG_DATA_HOME/cargo"     # Cargo on the other hand contains user-specific config and binaries 
-path_add "$CARGO_HOME/bin"
+if ( ! __shell_init_is_in_nix_shell ); then
+    # Rust environment because I always install it: I need it for LunarVim and lots of other tools
+    export RUSTUP_HOME="$XDG_CACHE_HOME/rustup"  # Put Rustup in cache, it only contains toolchains and downloads
+    export CARGO_HOME="$XDG_DATA_HOME/cargo"     # Cargo on the other hand contains user-specific config and binaries 
+    path_add "$CARGO_HOME/bin"
+fi
 
 # The untracked and non-ignored will be at the bottom of the list.
 # This is good because they are most of the time the ones I want when working

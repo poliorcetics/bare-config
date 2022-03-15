@@ -10,6 +10,8 @@ alias cg='cargo'
 alias lv='lvim'
 alias ..='z ..'
 
+alias hs='hx $(sk)'
+
 alias rgi='rg --no-ignore'
 alias fdi='fd -I'
 
