@@ -49,7 +49,7 @@ fi
 # The untracked and non-ignored will be at the bottom of the list.
 # This is good because they are most of the time the ones I want when working
 # on something that has a dirty git state.
-export SKIM_DEFAULT_COMMAND="git ls-files -co --exclude-standard || fd --type f"
+export SKIM_DEFAULT_COMMAND="git ls-files -co --exclude-standard || fd --type f --hidden"
 
 export _ZO_DATA_DIR="$XDG_STATE_HOME/zoxide"
 

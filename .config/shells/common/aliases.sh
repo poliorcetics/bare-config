@@ -10,15 +10,6 @@ alias cg='cargo'
 alias lv='lvim'
 alias ..='z ..'
 
-alias hs='hx $(sk)'
-function zs() {
-  local target_path=$(fd --type d --hidden --color never --strip-cwd-prefix $@ | sk --exit-0) # --preview='exa --long --all --group-directories-first --no-user {1}'
-  if [[ -z "$target_path" ]]; then
-    return 1;
-  fi;
-  z "$target_path"
-}
-
 alias rgi='rg --no-ignore'
 alias fdi='fd -I'
 

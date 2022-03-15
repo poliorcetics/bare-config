@@ -15,6 +15,7 @@ shell_config_path="$HOME/.config/shells"
 # When calling this script, `MAIN_SHELL` must be defined, see `utils.sh` for details.
 source "$shell_config_path/common/utils.sh"
 source "$shell_config_path/common/envvar.sh"
+source "$shell_config_path/common/functions.sh"
 source "$shell_config_path/common/aliases.sh"
 
 path_add "/usr/local/bin"
