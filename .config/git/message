@@ -1,39 +1,26 @@
+# Pas plus de 100 caractères. ....................................................................#
 
-# Pas plus de 50 caractères. 50 caractères ici ..#
+
+
 # Titre : Résumé, à l'impératif, commence avec une majuscule, ne finit pas par un point
-# A la forme : <type>(<perimètre>): <sujet>
+# Corps: Explique *quoi* et *pourquoi* et pas *comment*
+#
+# Titre : <type>(<perimètre>): <sujet>
+#
 # Type (ajouter un ! à la fin pour marquer un changement majeur)
 # - build : changements qui affectent le système de build ou des dépendances externes (npm, make…)
-# - ci : changements concernant les fichiers et scripts d'intégration ou de configuration (Travis, Ansible, BrowserStack…)
+# - chore : ce qu'on doit faire (ex bump les versions)
+# - ci : changements concernant les fichiers et scripts d'intégration ou de configuration)
+# - docs : rédaction ou mise à jour de documentation
 # - feat : ajout d'une nouvelle fonctionnalité
 # - fix : correction d'un bug
 # - perf : amélioration des performances de code
-# - retrain : réentraînement d'un modèle, avec en body les metadonnées
 # - refactor : modification qui n'apporte ni nouvelle fonctionalité ni d'amélioration de performances
-# - style : changement qui n'apporte aucune altération fonctionnelle ou sémantique (indentation, mise en forme, ajout d'espace, renommante d'une variable…)
-# - docs : rédaction ou mise à jour de documentation
+# - style : changement qui n'apporte aucune altération fonctionnelle ou sémantique
 # - test : ajout ou modification de tests
-# - chore : ce qu'on doit faire (ex bump les versions)
+#
 # Périmètre (optionnel), exemple (api) 
 # Ajouter un saut de ligne entre le titre et le corps 
-
-# Corps: Explique *quoi* et *pourquoi* et pas *comment*
-# Longueur maximale 72 caractères, correspondant à ici : ..............# 
-
-# Options 
-# BREAKING CHANGE
-# Reviewed-by: 
-# Refs: # 
-
-# How to Write a Git Commit Message:
-# https://chris.beams.io/posts/git-commit/
-# 
-# 1. Separate subject from body with a blank line
-# 2. Limit the subject line to 50 characters
-# 3. Capitalize the subject line
-# 4. Do not end the subject line with a period
-# 5. Use the imperative mood in the subject line
-# 6. Wrap the body at 72 characters
-# 7. Use the body to explain what and why vs. how
 #
-# see also : https://www.conventionalcommits.org/en/v1.0.0/
+# - https://chris.beams.io/posts/git-commit/
+# - https://www.conventionalcommits.org/en/v1.0.0/
