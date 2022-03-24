@@ -1,6 +1,10 @@
 theme = "gruvbox"
 
 [editor]
-line-number = "absolute"
+auto-info = true
 completion-trigger-len = 1
 idle-timeout = 0
+line-number = "absolute"
+
+[editor.file-picker]
+hidden = false
