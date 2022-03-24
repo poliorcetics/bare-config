@@ -16,9 +16,9 @@ function hr() {
         --exit-0 \
         --ansi \
         --interactive \
-        --cmd 'rg --color=always --vimgrep "{}"' \
+        --cmd 'if [ ! -z "{}" ]; then rg --color=always --block-buffered --vimgrep "{}"; else echo "-- No search query --"; fi' \
         | rg '^(.*:\d+:\d+):.*$' --replace '$1')
-    if [[ -z "$target_path" ]]; then return 1; fi;
+    if [[ -z "$target_path" || "$target_path" == "-- No search query --" ]]; then return 1; fi;
 
     hx "$target_path"
 }
