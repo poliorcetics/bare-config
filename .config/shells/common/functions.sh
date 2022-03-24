@@ -17,8 +17,11 @@ function hr() {
         --ansi \
         --interactive \
         --cmd 'if [ ! -z "{}" ]; then rg --color=always --block-buffered --vimgrep "{}"; else echo "-- No search query --"; fi' \
+        --delimiter ':' \
+        --preview='echo {1}:{2}:{3} | hgrep -c 5 -C 25' \
+        --preview-window='right:67%' \
         | rg '^(.*:\d+:\d+):.*$' --replace '$1')
-    if [[ -z "$target_path" || "$target_path" == "-- No search query --" ]]; then return 1; fi;
+    if [[ -z "$target_path" || "$target_path" == "-- No search query --"* ]]; then return 1; fi;
 
     hx "$target_path"
 }

@@ -71,7 +71,7 @@ fi
   exa \
   fd-find \
   git-delta gitui \
-  hyperfine \
+  hgrep hyperfine \
   mdbook \
   pastel procs \
   ripgrep rnr \
