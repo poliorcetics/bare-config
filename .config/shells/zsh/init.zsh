@@ -64,6 +64,7 @@ export HISTTIMEFORMAT="[%F %T] "
 
 if ( __shell_init_is_mac ); then
   [ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh || true
+  [ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 elif ( __shell_init_is_linux ); then
   ## Plugins section: Enable fish style features
   # Use syntax highlighting
@@ -88,7 +89,7 @@ compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 
 # pip completion is broken without this
 source "$XDG_CONFIG_HOME/shells/zsh/completions/_pip3"
-source "$XDG_CONFIG_HOME/shells/zsh/completions/_pip"
+[ -f "$XDG_CONFIG_HOME/shells/zsh/completions/_pip" ] && source "$XDG_CONFIG_HOME/shells/zsh/completions/_pip"
 
 
 zstyle ':completion:*' menu select                          # Allow you to select in a menu

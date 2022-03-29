@@ -46,6 +46,8 @@ if ( ! __shell_init_is_in_nix_shell ); then
     path_add "$CARGO_HOME/bin"
 fi
 
+path_add "/opt/homebrew/bin"
+
 # The untracked and non-ignored will be at the bottom of the list.
 # This is good because they are most of the time the ones I want when working
 # on something that has a dirty git state.
