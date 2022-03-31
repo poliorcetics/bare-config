@@ -26,6 +26,7 @@ if ( __shell_init_is_mac ) && ! command -v brew &> /dev/null; then
 
   brew install \
     cmake \
+    direnv \
     gh git \
     python3 \
     zsh zsh-syntax-highlighting
