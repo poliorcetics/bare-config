@@ -18,9 +18,12 @@ export VISUAL="hx"
 
 # Lang, most tools do not handle anything but English,
 # and americans do not know how to speak English so use GB
-export LANG="en_GB.UTF-8"
-export LC_ALL="en_GB.UTF-8"
+export LANGUAGE="en_GB:en_US:fr_FR"
 export LC_MESSAGES="en_GB.UTF-8"
+export LANG="en_GB.UTF-8"
+if ( __shell_init_is_in_nix_shell ); then
+    export LC_ALL="en_US.UTF-8"
+fi
 # Still use French for numbers, time and money, these are the formats and units I know
 export LC_ADDRESS="fr_FR.UTF-8"
 export LC_COLLATE="fr_FR.UTF-8"

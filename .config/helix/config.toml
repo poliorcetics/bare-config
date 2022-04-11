@@ -8,3 +8,6 @@ line-number = "absolute"
 
 [editor.file-picker]
 hidden = false
+
+[keys.normal.space]
+g = "file_picker_in_current_directory"
