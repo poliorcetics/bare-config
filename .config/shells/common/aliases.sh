@@ -9,6 +9,7 @@ alias g='git'
 alias cg='cargo'
 alias lv='lvim'
 alias ..='z ..'
+alias j='just'
 
 alias rgi='rg --no-ignore'
 alias fdi='fd -I'

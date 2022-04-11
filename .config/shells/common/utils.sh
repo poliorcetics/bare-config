@@ -79,6 +79,8 @@ if [[ -z "${shell_utils_imported+x}" ]]; then
     kitty + complete setup $1 > "$comp_dir/_kitty"
 
     starship completions $1 > "$comp_dir/_starship"
+
+    just --completions $1 > "$comp_dir/_just"
   }
 
   function gen_all_completions() {

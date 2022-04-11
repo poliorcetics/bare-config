@@ -3,7 +3,7 @@
 function hs() {
     local target_path=$(sk \
         --exit-0 \
-        --preview='bat -p --color always {1}' \
+        --preview="bat -p --color always '{1}'" \
         --preview-window='right:67%')
     if [[ -z "$target_path" ]]; then return 1; fi;
 
@@ -16,7 +16,7 @@ function hr() {
         --exit-0 \
         --ansi \
         --interactive \
-        --cmd 'if [ ! -z "{}" ]; then rg --color=always --block-buffered --vimgrep "{}"; else echo "-- No search query --"; fi' \
+        --cmd "if [ ! -z '{}' ]; then rg --color=always --block-buffered --vimgrep '{}'; else echo '-- No search query --'; fi" \
         --delimiter ':' \
         --preview='echo {1}:{2}:{3} | hgrep -c 5 -C 25' \
         --preview-window='right:67%' \
@@ -35,7 +35,7 @@ function zs() {
         --strip-cwd-prefix $@ \
         | sk \
         --exit-0 \
-        --preview='bat -p --color always {1}' \
+        --preview="bat -p --color always '{1}'" \
         --preview-window='right:67%')
     if [[ -z "$target_path" ]]; then return 1; fi;
 

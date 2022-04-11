@@ -28,11 +28,11 @@ if ( __shell_init_is_mac ) && ! command -v brew &> /dev/null; then
     cmake \
     direnv \
     gh git \
-    python3 \
+    prettier python3 \
     zsh zsh-syntax-highlighting
 
   brew install --cask \
-    alacritty \
+    alacritty amethyst \
     cyberduck \
     firefox \
     kitty \
@@ -73,6 +73,7 @@ fi
   fd-find \
   git-delta gitui \
   hgrep hyperfine \
+  just \
   mdbook \
   pastel procs \
   ripgrep rnr \
