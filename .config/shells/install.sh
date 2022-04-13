@@ -121,7 +121,7 @@ else
   cd "$HOME/repos/"
 fi
 
-git clone https://github.com/rust-analyzer/rust-analyzer
+git clone https://github.com/rust-lang/rust-analyzer
 git clone https://github.com/helix-editor/helix
 run_all_updates --ra --hx
 
