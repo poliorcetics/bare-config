@@ -27,6 +27,7 @@
   p = pull
   pr = pull --rebase
   ps = push
+  pf = push --force-with-lease
   s = status
   sl = status .
   cp = cherry-pick

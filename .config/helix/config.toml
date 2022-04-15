@@ -5,6 +5,7 @@ auto-info = true
 completion-trigger-len = 1
 idle-timeout = 0
 line-number = "absolute"
+mouse = false
 
 [editor.file-picker]
 hidden = false
