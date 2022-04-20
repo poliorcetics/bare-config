@@ -43,3 +43,6 @@ target-rust-analyzer
 
 # YCM (vim plugin) files
 .ycm_extra_conf.py
+
+# Helix local config files
+.helix
