@@ -162,7 +162,7 @@ if [[ -z "${shell_utils_imported+x}" ]]; then
             && git checkout master \
             && git pull \
             && cargo install --force --path helix-term \
-            && ln -fs "$PWD/runtime" "$helix_runtime" \
+            && ln -Ffs "$PWD/runtime" "$helix_runtime" \
             && cd "$helix_runtime" \
             && cd .. \
             && hx --grammar fetch \

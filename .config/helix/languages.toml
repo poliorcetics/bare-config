@@ -1,6 +1,5 @@
 [[language]]
 name = "rust"
-auto-format = true
 
 [language.config]
 assist.importGranularity = "module"
