@@ -4,15 +4,12 @@ auto-format = true
 
 [language.config]
 assist.importGranularity = "module"
-# cargo.target = "x86_64-pc-windows-msvc"
 # A little slower than a simple check, but so useful
 checkOnSave.command = "clippy"
 # Putting the target dir for RA inside target/ means it is automatically cleaned up
 # by 'cargo clean' and hidden when there is a .gitignore or some global ignore for
 # a Rust config
 checkOnSave.extraArgs = ["--target-dir", "target/target-rust-analyzer"]
-# checkOnSave.target = "x86_64-pc-windows-msvc"
-# diagnostics.disabled = ["unresolved-proc-macro", "unresolved_proc_macro"]
 hoverActions.references = true
 lens.enumVariantReferences = true
 lens.methodReferences = true
@@ -21,6 +18,11 @@ lens.references = true
 lruCapacity = 256
 procMacro.enable = true
 workspace.symbol.search.kind = "all_symbols"
+
+# Use those in local config
+# cargo.target = "x86_64-pc-windows-msvc"
+# checkOnSave.target = "x86_64-pc-windows-msvc"
+# diagnostics.disabled = ["unresolved-proc-macro", "unresolved_proc_macro"]
 
 
 
