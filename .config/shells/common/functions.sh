@@ -1,5 +1,9 @@
 # Aliases that have evolved into functions
 
+function bakon() {
+    bacon cargo-config -- $1 --color always 
+}
+
 function hs() {
     local target_path=$(sk \
         --exit-0 \

@@ -11,8 +11,8 @@ alias lv='lvim'
 alias ..='z ..'
 alias j='just'
 
-alias rgi='rg --no-ignore'
-alias fdi='fd -I'
+alias rgi='rg --no-ignore --hidden'
+alias fdi='fd -IH'
 
 alias pj='pijul'
 

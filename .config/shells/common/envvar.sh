@@ -59,3 +59,6 @@ export SKIM_DEFAULT_COMMAND="git ls-files -co --exclude-standard || fd --type f 
 export _ZO_DATA_DIR="$XDG_STATE_HOME/zoxide"
 
 export STARSHIP_CACHE="$XDG_CACHE_HOME/starship"
+
+export ZELLIJ_CONFIG_DIR="$XDG_CONFIG_HOME/zellij"
+export ZELLIJ_CONFIG_FILE="$ZELLIJ_CONFIG_DIR/config.yaml"
