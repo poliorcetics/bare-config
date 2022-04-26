@@ -6,6 +6,7 @@ completion-trigger-len = 1
 idle-timeout = 0
 line-number = "absolute"
 mouse = false
+rulers = [ 80, 100, 120 ]
 
 [editor.file-picker]
 hidden = false
