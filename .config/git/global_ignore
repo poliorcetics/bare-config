@@ -46,3 +46,6 @@ target-rust-analyzer
 
 # Helix local config files
 .helix
+
+# Bacon: project config file
+bacon.toml
