@@ -1,7 +1,7 @@
 format = """\
     ${username}\
     ${hostname}\
-    ${custom.pwd}\
+    ${directory}\
     ${git_branch}\
     ${git_state}\
     ${git_status}\
@@ -27,19 +27,15 @@ success_symbol = "[❯](bold green)"
 show_milliseconds = true
 style = "yellow"
 
-[custom.pwd]
-command = "pwd"
-description = "Prints the current working directory by compacting it."
-style = "cyan"
-format = "[$output]($style) "
-when = "true"
-
 [custom.nix]
 command = "echo 'nix'"
 description = "Adds an indicator a nix shell is active when $IN_NIX_SHELL is present."
 style = ""
 format = "[$output]($style) "
 when = "test ! -z \"$IN_NIX_SHELL\""
+
+[directory]
+style = "cyan"
 
 [git_branch]
 style = "purple"
@@ -81,8 +77,6 @@ disabled = true
 disabled = true
 [crystal]
 disabled = true
-[directory]
-disabled = true
 [docker_context]
 disabled = true
 [dotnet]
@@ -95,7 +89,6 @@ disabled = true
 disabled = true
 [erlang]
 disabled = true
-# The following takes too long to run on big repo
 [golang]
 disabled = true
 [java]
