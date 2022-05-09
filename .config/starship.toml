@@ -36,6 +36,9 @@ when = "test ! -z \"$IN_NIX_SHELL\""
 
 [directory]
 style = "cyan"
+repo_root_style = "bold cyan"
+truncation_length = 1
+fish_style_pwd_dir_length = 1
 
 [git_branch]
 style = "purple"
